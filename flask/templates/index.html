@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriPredict 🌾</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="bg-light">
+    <div class="container py-5">
+        <h1 class="text-success mb-4 text-center">🌾 Crop Yield Predictor</h1>
+        
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <form action="/predict" method="POST" class="card p-4 shadow-sm border-0" id="predictForm">
+                    
+                    <div class="row">
+                        {% for col, levels in cat_options.items() %}
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-bold">{{ col }}</label>
+                            <select name="{{ col }}" class="form-select" required>
+                                {% for level in levels %}
+                                <option value="{{ level }}">{{ level }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-bold">Area (Hectares)</label>
+                            <input type="number" step="0.1" min="0.1" name="Area" class="form-control" placeholder="e.g. 5.5" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-bold">Annual Rainfall (mm)</label>
+                            <input type="number" step="0.1" min="0" name="Annual_Rainfall" class="form-control" required>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label fw-bold">Fertilizer (kg)</label>
+                            <input type="number" step="0.1" min="0" name="Fertilizer" class="form-control" required>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label fw-bold">Pesticide (kg)</label>
+                            <input type="number" step="0.1" min="0" name="Pesticide" class="form-control" required>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label fw-bold">Crop Year</label>
+                            <input type="number" min="2000" max="2030" name="Crop_Year" class="form-control" value="2026" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-success btn-lg mt-3 w-100">Predict Harvest 🔮</button>
+                </form>
+
+                {% if error %}
+                <div class="alert alert-danger mt-4">
+                    {{ error }}
+                </div>
+                {% endif %}
+
+                {% if prediction is defined %}
+                <div class="mt-4 card border-success shadow-sm">
+                    <div class="card-body text-center">
+                        <h2 class="text-success">✅ Results</h2>
+                        <p class="fs-4">Expected Yield: <strong>{{ prediction }} tons/hectare</strong></p>
+                        <p class="text-muted">Total Production: <strong>{{ total }} tons</strong></p>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <script>
+    document.getElementById('predictForm').addEventListener('submit', function(e) {
+        const nums = ['Area', 'Annual_Rainfall', 'Fertilizer', 'Pesticide', 'Crop_Year'];
+        for (let field of nums) {
+            const val = document.querySelector(`[name="${field}"]`).value;
+            if (isNaN(val) || parseFloat(val) < 0) {
+                alert(`${field} must be positive number`);
+                e.preventDefault();
+                return;
+            }
+        }
+    });
+    </script>
+</body>
+</html>
+
