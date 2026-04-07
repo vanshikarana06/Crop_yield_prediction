@@ -46,7 +46,7 @@ crop_yield_prediction/
 ├── models/               # Trained model files
 ├── artifacts/            # Scalers & encoders
 └── README.md             # Documentation
-
+```
 
 ## 🤖 Machine Learning Model
 
@@ -74,3 +74,10 @@ crop_yield_prediction/
 ```bash
 cd flask
 python app.py
+```
+
+### 🔹 Option 2: Streamlit App (Prototype)
+```bash
+cd streamlit
+streamlit run appmy.py
+```
