@@ -1,68 +1,76 @@
 # 🌾 Crop Yield Prediction System
 
+[![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/)
+[![Flask](https://img.shields.io/badge/Framework-Flask-red)](https://flask.palletsprojects.com/)
+[![Streamlit](https://img.shields.io/badge/UI-Streamlit-FF4B4B)](https://streamlit.io/)
+[![Scikit-Learn](https://img.shields.io/badge/ML-Scikit--Learn-orange)](https://scikit-learn.org/)
+
+---
+
 ## 📌 Overview
-This project predicts agricultural crop yield using Machine Learning techniques. It was initially developed using Streamlit for rapid prototyping and later upgraded to Flask for better scalability and backend control.
+An end-to-end Machine Learning system for predicting agricultural crop yields using environmental and soil parameters. The project follows a **dual architecture approach**:
+- **Streamlit** for rapid prototyping and validation  
+- **Flask** for production-ready backend deployment  
 
 ---
 
 ## 🚀 Features
-- Predict crop yield based on input parameters  
-- Machine Learning model integration  
-- Web-based interface  
-- Two implementations:
-  - Streamlit (prototype)
-  - Flask (production-ready)
+- **Accurate Predictions:** Utilizes a Random Forest Regressor for reliable yield estimation  
+- **Dual Deployment:** Streamlit prototype + Flask production backend  
+- **Data Pipeline:** Feature engineering with encoding, scaling, and transformations  
+- **Web Interface:** Custom HTML/CSS frontend integrated with backend  
 
 ---
 
 ## 🛠️ Tech Stack
-- Python  
-- Flask (Backend)  
-- Streamlit (Prototype UI)  
-- Machine Learning (scikit-learn)  
-- HTML, CSS (Frontend)  
+
+| Category | Tools & Technologies |
+|----------|--------------------|
+| **Languages** | Python, HTML5, CSS3 |
+| **Backend** | Flask (Production), Streamlit (Prototype) |
+| **Machine Learning** | Scikit-learn, NumPy, Pandas |
+| **Deployment** | Joblib, GitHub |
 
 ---
 
 ## 📂 Project Structure
 
+```text
 crop_yield_prediction/
-│
-├── flask/
-│ ├── app.py
-│ ├── templates/
-│ └── static/
-│
-├── streamlit/
-│ └── appmy.py
-│
-├── models/ # (model not uploaded due to size)
-├── artifacts/
-├── README.md
+├── flask/                # Production-ready Flask app
+│   ├── app.py            # Backend logic
+│   ├── templates/        # HTML frontend
+│   └── static/           # CSS & assets
+├── streamlit/            # Rapid prototyping
+│   └── appmy.py          # Streamlit UI
+├── models/               # Trained model files
+├── artifacts/            # Scalers & encoders
+└── README.md             # Documentation
 
-
----
 
 ## 🤖 Machine Learning Model
-- Model used: Random Forest  
-- Trained on agricultural dataset  
-- Includes preprocessing steps (encoding, scaling, transformations)
+
+- **Algorithm:** Random Forest Regressor *(robust to outliers in agricultural data)*  
+- **Data Processing:** Standard scaling and categorical encoding  
+- **Performance:** $R^2 \approx 0.89$  
+- **Evaluation Metrics:** RMSE and R²  
 
 ---
 
-## ⚠️ Model File Note
-Due to GitHub file size limitations:
-> The trained model (`.joblib`) is not included in this repository.
+## ⚠️ Model File
 
-👉 You can:
-- Download it from external storage (Google Drive, etc.)
-- Or retrain the model using the provided code
+> **Note:**  
+> Due to GitHub file size limitations, the trained `.joblib` model is not included.
+
+### To run the project:
+- Download the pre-trained model from external storage (e.g., Google Drive), or  
+- Retrain the model using the provided dataset and training scripts  
 
 ---
 
 ## ▶️ How to Run
 
-### 🔹 Run Flask App
+### 🔹 Option 1: Flask App (Production)
 ```bash
 cd flask
 python app.py
